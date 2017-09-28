@@ -15,7 +15,7 @@ $pdo  = new PDO($dsn, $un, $pwd, $opt);
 $id = filter_var($_REQUEST['id'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 $data = array();
 try {
-	$sql = 'SELECT * FROM Practicas WHERE (Practicas.id_up = ' . $id . ')';
+	$sql = 'SELECT Practicas.date, Practicas.hour, Practicas.id_p, Usuarios.n_pract FROM Practicas, Usuarios  WHERE (Practicas.id_up = ' . $id . ') AND (Usuarios.id_u = Practicas.id_up)';
     $stmt    = $pdo->query($sql);
 	while($row  = $stmt->fetch(PDO::FETCH_OBJ))
     {
